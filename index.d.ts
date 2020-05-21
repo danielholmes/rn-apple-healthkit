@@ -111,29 +111,29 @@ declare module "rn-apple-healthkit" {
     }
 
     export interface AppleHealthKit {
-        initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
+        initHealthKit(permissions: HealthKitPermissions, callback: (error: Error | null, result: Object) => void): void;
 
-        saveFood(options: Object, callback: (error: string, result: Object) => void): void;
+        saveFood(options: Object, callback: (error: Error | null, result: Object) => void): void;
 
         isAvailable(callback: (error: Object, results: boolean) => void): void;
 
         getDateOfBirth(options: any, callback: (error: Object, results: HealthDateOfBirth) => void): void;
 
-        getLatestHeight(options: HealthUnitOptions, callback: (err: string, results: HealthValue) => void): void;
+        getLatestHeight(options: HealthUnitOptions, callback: (error: Error | null, results: HealthValue) => void): void;
 
-        getLatestWeight(options: HealthUnitOptions, callback: (err: string, results: HealthValue) => void): void;
+        getLatestWeight(options: HealthUnitOptions, callback: (error: Error | null, results: HealthValue) => void): void;
 
-        getMindfulSession(options: MindfulSessionData, callback: (err: string, results: HealthValue) => void): void;
+        getMindfulSession(options: MindfulSessionData, callback: (error: Error | null, results: HealthValue) => void): void;
 
-        getStepCount(options: any, callback: (err: string, results: HealthValue) => void): void;
+        getStepCount(options: any, callback: (error: Error | null, results: HealthValue) => void): void;
 
-        getOxygenSamples(options: OxygenSamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
+        getOxygenSamples(options: OxygenSamplesOptions, callback: (error: Error | null, results: ReadonlyArray<HealthValue>) => void): void;
 
-        getHeartRateVariabilitySamples(options: HeartRateVariabilitySamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
+        getHeartRateVariabilitySamples(options: HeartRateVariabilitySamplesOptions, callback: (error: Error | null, results: ReadonlyArray<HealthValue>) => void): void;
 
-        getRestingHeartRateSamples(options: RestingHeartRateSamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
+        getRestingHeartRateSamples(options: RestingHeartRateSamplesOptions, callback: (error: Error | null, results: ReadonlyArray<HealthValue>) => void): void;
 
-        getSleepSamples(options: SleepSamplesOptions, callback: (err: string, results: ReadonlyArray<SleepValue>) => void): void;
+        getSleepSamples(options: SleepSamplesOptions, callback: (error: Error | null, results: ReadonlyArray<SleepValue>) => void): void;
     }
 
     export interface HealthDateOfBirth {
@@ -142,6 +142,8 @@ declare module "rn-apple-healthkit" {
     }
 
     export interface ResultValue<T> {
+        readonly sourceId: string;
+        readonly sourceName: string;
         readonly value: T;
         readonly startDate: string;
         readonly endDate: string;

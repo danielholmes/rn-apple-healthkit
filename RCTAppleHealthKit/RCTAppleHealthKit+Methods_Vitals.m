@@ -91,13 +91,12 @@
                            ascending:ascending
                                limit:limit
                           completion:^(NSArray *results, NSError *error) {
-        if(results){
-            callback(@[[NSNull null], results]);
-            return;
-        } else {
+        if(error){
+            NSLog(@"error getting RHR samples: %@", error);
             callback(@[RCTJSErrorFromNSError(error)]);
             return;
         }
+        callback(@[[NSNull null], results]);
     }];
 }
 
@@ -122,13 +121,12 @@
                            ascending:ascending
                                limit:limit
                           completion:^(NSArray *results, NSError *error) {
-        if(results){
-            callback(@[[NSNull null], results]);
-            return;
-        } else {
+        if(error){
+            NSLog(@"error getting oxygen samples: %@", error);
             callback(@[RCTJSErrorFromNSError(error)]);
             return;
         }
+        callback(@[[NSNull null], results]);
     }];
 }
 
