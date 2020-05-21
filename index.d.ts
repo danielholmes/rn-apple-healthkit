@@ -79,11 +79,13 @@ declare module "rn-apple-healthkit" {
         limit?: number
     }
 
+    export type ISO8601DateString = string;
+
     export interface OxygenSamplesOptions {
       readonly limit?: number;
       readonly ascending?: boolean;
-      readonly startDate: Date;
-      readonly endDate?: Date;
+      readonly startDate: ISO8601DateString;
+      readonly endDate?: ISO8601DateString;
     }
 
     export interface AppleHealthKit {
