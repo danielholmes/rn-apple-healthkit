@@ -96,7 +96,7 @@
                 }
 
                 completion(data, nil);
-            } @catch (id runError) {
+            } @catch (NSException *runError) {
                 completion(nil, runError);
             }
         });
@@ -219,7 +219,7 @@
                 }
 
                 completion(data, nil);
-            } @catch (id runError) {
+            } @catch (NSException *runError) {
                 completion(nil, runError);
             }
         });
@@ -323,7 +323,7 @@
                 }
 
                 completion(data, nil);
-            } @catch (id runError) {
+            } @catch (NSException *runError) {
                 completion(nil, runError);
             }
         });
@@ -396,7 +396,7 @@
                 }
 
                 completion(data, nil);
-            } @catch (id runError) {
+            } @catch (NSException *runError) {
                 completion(nil, runError);
             }
         });
