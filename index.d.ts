@@ -79,6 +79,13 @@ declare module "rn-apple-healthkit" {
         limit?: number
     }
 
+    export interface OxygenSamplesOptions {
+      readonly limit?: number;
+      readonly ascending?: boolean;
+      readonly startDate: Date;
+      readonly endDate?: Date;
+    }
+
     export interface AppleHealthKit {
         initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
 
@@ -95,6 +102,8 @@ declare module "rn-apple-healthkit" {
         getMindfulSession(options: MindfulSessionData, callback: (err: string, results: HealthValue) => void): void;
 
         getStepCount(options: any, callback: (err: string, results: HealthValue) => void): void;
+
+        getOxygenSamples(options: OxygenSamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
     }
 
     export interface HealthDateOfBirth {
