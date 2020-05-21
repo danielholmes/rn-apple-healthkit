@@ -296,9 +296,12 @@
                       case HKCategoryValueSleepAnalysisAsleep:
                         valueString = @"ASLEEP";
                       break;
-                     default:
+                      case HKCategoryValueSleepAnalysisAwake:
+                        valueString = @"AWAKE";
+                      break;
+                      default:
                         valueString = @"UNKNOWN";
-                     break;
+                      break;
                   }
 
                     NSDictionary *elem = @{

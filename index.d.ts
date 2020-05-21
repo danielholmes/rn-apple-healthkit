@@ -104,6 +104,12 @@ declare module "rn-apple-healthkit" {
         readonly endDate?: ISO8601DateString;
     }
 
+    export interface SleepSamplesOptions {
+        readonly limit?: number;
+        readonly startDate: ISO8601DateString;
+        readonly endDate?: ISO8601DateString;
+    }
+
     export interface AppleHealthKit {
         initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
 
@@ -126,18 +132,24 @@ declare module "rn-apple-healthkit" {
         getHeartRateVariabilitySamples(options: HeartRateVariabilitySamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
 
         getRestingHeartRateSamples(options: RestingHeartRateSamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
+
+        getSleepSamples(options: SleepSamplesOptions, callback: (err: string, results: ReadonlyArray<ResultValue<SleepType>>) => void): void;
     }
+
+    export type SleepType = 'INBED' | 'ASLEEP' | 'AWAKE';
 
     export interface HealthDateOfBirth {
         value: string;
         age: number;
     }
 
-    export interface HealthValue {
-        value: number;
-        startDate: string;
-        endDate: string;
+    export interface ResultValue<T> {
+        readonly value: T;
+        readonly startDate: string;
+        readonly endDate: string;
     }
+
+    export type HealthValue = ResultValue<number>;
 
     export interface HealthUnitOptions {
         unit: HealthUnit;
