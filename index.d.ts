@@ -1,77 +1,76 @@
 declare module "rn-apple-healthkit" {
-    export enum Permissions {
-      ActiveEnergyBurned = "ActiveEnergyBurned",
-      AppleExerciseTime = "AppleExerciseTime",
-      BasalEnergyBurned = "BasalEnergyBurned",
-      BiologicalSex = "BiologicalSex",
-      BloodGlucose = "BloodGlucose",
-      BloodPressureDiastolic = "BloodPressureDiastolic",
-      BloodPressureSystolic = "BloodPressureSystolic",
-      BodyFatPercentage = "BodyFatPercentage",
-      BodyMass = "BodyMass",
-      BodyMassIndex = "BodyMassIndex",
-      BodyTemperature = "BodyTemperature",
-      DateOfBirth = "DateOfBirth",
-      Biotin = "Biotin",
-      Caffeine = "Caffeine",
-      Calcium = "Calcium",
-      Carbohydrates = "Carbohydrates",
-      Chloride = "Chloride",
-      Cholesterol = "Cholesterol",
-      Copper = "Copper",
-      EnergyConsumed = "EnergyConsumed",
-      FatMonounsaturated = "FatMonounsaturated",
-      FatPolyunsaturated = "FatPolyunsaturated",
-      FatSaturated = "FatSaturated",
-      FatTotal = "FatTotal",
-      Fiber = "Fiber",
-      Folate = "Folate",
-      Iodine = "Iodine",
-      Iron = "Iron",
-      Magnesium = "Magnesium",
-      Manganese = "Manganese",
-      Molybdenum = "Molybdenum",
-      Niacin = "Niacin",
-      Oxygen = "Oxygen",
-      PantothenicAcid = "PantothenicAcid",
-      Phosphorus = "Phosphorus",
-      Potassium = "Potassium",
-      Protein = "Protein",
-      Riboflavin = "Riboflavin",
-      Selenium = "Selenium",
-      Sodium = "Sodium",
-      Sugar = "Sugar",
-      Thiamin = "Thiamin",
-      VitaminA = "VitaminA",
-      VitaminB12 = "VitaminB12",
-      VitaminB6 = "VitaminB6",
-      VitaminC = "VitaminC",
-      VitaminD = "VitaminD",
-      VitaminE = "VitaminE",
-      VitaminK = "VitaminK",
-      Zinc = "Zinc",
-      Water = "Water",
-      DistanceCycling = "DistanceCycling",
-      DistanceSwimming = "DistanceSwimming",
-      DistanceWalkingRunning = "DistanceWalkingRunning",
-      FlightsClimbed = "FlightsClimbed",
-      HeartRate = "HeartRate",
-      Height = "Height",
-      LeanBodyMass = "LeanBodyMass",
-      MindfulSession = "MindfulSession",
-      NikeFuel = "NikeFuel",
-      RespiratoryRate = "RespiratoryRate",
-      SleepAnalysis = "SleepAnalysis",
-      StepCount = "StepCount",
-      Steps = "Steps",
-      Weight = "Weight",
-      Workout = "Workout"
-    }
+    export type Permission =
+      "ActiveEnergyBurned" |
+      "AppleExerciseTime" |
+      "BasalEnergyBurned" |
+      "BiologicalSex" |
+      "BloodGlucose" |
+      "BloodPressureDiastolic" |
+      "BloodPressureSystolic" |
+      "BodyFatPercentage" |
+      "BodyMass" |
+      "BodyMassIndex" |
+      "BodyTemperature" |
+      "DateOfBirth" |
+      "Biotin" |
+      "Caffeine" |
+      "Calcium" |
+      "Carbohydrates" |
+      "Chloride" |
+      "Cholesterol" |
+      "Copper" |
+      "EnergyConsumed" |
+      "FatMonounsaturated" |
+      "FatPolyunsaturated" |
+      "FatSaturated" |
+      "FatTotal" |
+      "Fiber" |
+      "Folate" |
+      "Iodine" |
+      "Iron" |
+      "Magnesium" |
+      "Manganese" |
+      "Molybdenum" |
+      "Niacin" |
+      "Oxygen" |
+      "PantothenicAcid" |
+      "Phosphorus" |
+      "Potassium" |
+      "Protein" |
+      "Riboflavin" |
+      "Selenium" |
+      "Sodium" |
+      "Sugar" |
+      "Thiamin" |
+      "VitaminA" |
+      "VitaminB12" |
+      "VitaminB6" |
+      "VitaminC" |
+      "VitaminD" |
+      "VitaminE" |
+      "VitaminK" |
+      "Zinc" |
+      "Water" |
+      "DistanceCycling" |
+      "DistanceSwimming" |
+      "DistanceWalkingRunning" |
+      "FlightsClimbed" |
+      "HeartRate" |
+      "Height" |
+      "LeanBodyMass" |
+      "MindfulSession" |
+      "NikeFuel" |
+      "RespiratoryRate" |
+      "SleepAnalysis" |
+      "StepCount" |
+      "Steps" |
+      "Weight" |
+      "Workout"
 
     export interface HealthKitPermissions {
         permissions: {
-            read: Permissions[];
-            write: Permissions[];
+            read: Permission[];
+            write: Permission[];
         };
     }
     export interface MindfulSessionData {
