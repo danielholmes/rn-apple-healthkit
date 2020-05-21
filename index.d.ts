@@ -62,6 +62,7 @@ declare module "rn-apple-healthkit" {
       "MindfulSession" |
       "NikeFuel" |
       "RespiratoryRate" |
+      "RestingHeartRate" |
       "SleepAnalysis" |
       "StepCount" |
       "Steps" |
@@ -96,6 +97,13 @@ declare module "rn-apple-healthkit" {
         readonly endDate?: ISO8601DateString;
     }
 
+    export interface RestingHeartRateSamplesOptions {
+        readonly limit?: number;
+        readonly ascending?: boolean;
+        readonly startDate: ISO8601DateString;
+        readonly endDate?: ISO8601DateString;
+    }
+
     export interface AppleHealthKit {
         initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
 
@@ -116,6 +124,8 @@ declare module "rn-apple-healthkit" {
         getOxygenSamples(options: OxygenSamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
 
         getHeartRateVariabilitySamples(options: HeartRateVariabilitySamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
+
+        getRestingHeartRateSamples(options: RestingHeartRateSamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
     }
 
     export interface HealthDateOfBirth {

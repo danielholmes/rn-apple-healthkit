@@ -31,6 +31,7 @@ export const Permissions = {
   Fiber: "Fiber",
   Folate: "Folate",
   HeartRateVariability: "HeartRateVariability",
+  RestingHeartRate: "RestingHeartRate",
   Iodine: "Iodine",
   Iron: "Iron",
   Magnesium: "Magnesium",

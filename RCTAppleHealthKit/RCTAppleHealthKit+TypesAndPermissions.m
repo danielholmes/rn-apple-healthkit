@@ -72,6 +72,8 @@
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     }else if ([@"HeartRateVariability" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRateVariabilitySDNN];
+    }else if ([@"RestingHeartRate" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierRestingHeartRate];
     }else if ([@"Oxygen" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierOxygenSaturation];
     }else if ([@"BodyTemperature" isEqualToString: key]) {
