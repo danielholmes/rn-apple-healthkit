@@ -76,7 +76,7 @@
         NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            do {
+            @try {
                 for (HKQuantitySample *sample in results) {
                     HKQuantity *quantity = sample.quantity;
                     double value = [quantity doubleValueForUnit:unit];
@@ -96,7 +96,7 @@
                 }
 
                 completion(data, nil);
-            } catch let runError as NSError {
+            } @catch (id runError) {
                 completion(nil, runError);
             }
         });
@@ -136,7 +136,7 @@
         NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            do {
+            @try {
                 if (type == [HKObjectType workoutType]) {
                     for (HKWorkout *sample in results) {
                         double energy =  [[sample totalEnergyBurned] doubleValueForUnit:[HKUnit kilocalorieUnit]];
@@ -219,7 +219,7 @@
                 }
 
                 completion(data, nil);
-            } catch let runError as NSError {
+            } @catch (id runError) {
                 completion(nil, runError);
             }
         });
@@ -282,7 +282,7 @@
         NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            do {
+            @try {
                 for (HKCategorySample *sample in results) {
 
                     // HKCategoryType *catType = sample.categoryType;
@@ -323,7 +323,7 @@
                 }
 
                 completion(data, nil);
-            } catch let runError as NSError {
+            } @catch (id runError) {
                 completion(nil, runError);
             }
         });
@@ -382,7 +382,7 @@
         NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            do {
+            @try {
                 for (HKCorrelation *sample in results) {
                     NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
                     NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
@@ -396,7 +396,7 @@
                 }
 
                 completion(data, nil);
-            } catch let runError as NSError {
+            } @catch (id runError) {
                 completion(nil, runError);
             }
         });
