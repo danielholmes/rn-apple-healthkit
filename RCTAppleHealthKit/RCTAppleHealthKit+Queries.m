@@ -30,22 +30,21 @@
                          limit:1
                sortDescriptors:@[timeSortDescriptor]
                 resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
+                        if (!completion) {
+                            return;
+                        }
 
                       if (!results) {
-                          if (completion) {
-                              completion(nil, nil, nil, error);
-                          }
+                          completion(nil, nil, nil, error);
                           return;
                       }
 
-                      if (completion) {
-                          // If quantity isn't in the database, return nil in the completion block.
-                          HKQuantitySample *quantitySample = results.firstObject;
-                          HKQuantity *quantity = quantitySample.quantity;
-                          NSDate *startDate = quantitySample.startDate;
-                          NSDate *endDate = quantitySample.endDate;
-                          completion(quantity, startDate, endDate, error);
-                      }
+                      // If quantity isn't in the database, return nil in the completion block.
+                      HKQuantitySample *quantitySample = results.firstObject;
+                      HKQuantity *quantity = quantitySample.quantity;
+                      NSDate *startDate = quantitySample.startDate;
+                      NSDate *endDate = quantitySample.endDate;
+                      completion(quantity, startDate, endDate, error);
                 }
     ];
     [self.healthStore executeQuery:query];
@@ -65,18 +64,19 @@
     void (^handlerBlock)(HKSampleQuery *query, NSArray *results, NSError *error);
     // create and assign the block
     handlerBlock = ^(HKSampleQuery *query, NSArray *results, NSError *error) {
-        if (!results) {
-            if (completion) {
-                completion(nil, error);
-            }
+        if (!completion) {
             return;
         }
 
-        if (completion) {
-            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+        if (error) {
+            completion(nil, error);
+            return;
+        }
 
-            dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
+        dispatch_async(dispatch_get_main_queue(), ^{
+            do {
                 for (HKQuantitySample *sample in results) {
                     HKQuantity *quantity = sample.quantity;
                     double value = [quantity doubleValueForUnit:unit];
@@ -95,9 +95,11 @@
                     [data addObject:elem];
                 }
 
-                completion(data, error);
-            });
-        }
+                completion(data, nil);
+            } catch let runError as NSError {
+                completion(nil, runError);
+            }
+        });
     };
 
     HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:quantityType
@@ -122,17 +124,19 @@
     void (^handlerBlock)(HKSampleQuery *query, NSArray *results, NSError *error);
     // create and assign the block
     handlerBlock = ^(HKSampleQuery *query, NSArray *results, NSError *error) {
-        if (!results) {
-            if (completion) {
-                completion(nil, error);
-            }
+        if (!completion) {
             return;
         }
 
-        if (completion) {
-            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+        if (error) {
+            completion(nil, error);
+            return;
+        }
 
-            dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            do {
                 if (type == [HKObjectType workoutType]) {
                     for (HKWorkout *sample in results) {
                         double energy =  [[sample totalEnergyBurned] doubleValueForUnit:[HKUnit kilocalorieUnit]];
@@ -214,9 +218,11 @@
                     }
                 }
 
-                completion(data, error);
-            });
-        }
+                completion(data, nil);
+            } catch let runError as NSError {
+                completion(nil, runError);
+            }
+        });
     };
 
     HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type
@@ -264,18 +270,19 @@
     void (^handlerBlock)(HKSampleQuery *query, NSArray *results, NSError *error);
     // create and assign the block
     handlerBlock = ^(HKSampleQuery *query, NSArray *results, NSError *error) {
-        if (!results) {
-            if (completion) {
-                completion(nil, error);
-            }
+        if (!completion) {
             return;
         }
 
-        if (completion) {
-            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+        if (error) {
+            completion(nil, error);
+            return;
+        }
 
-            dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
+        dispatch_async(dispatch_get_main_queue(), ^{
+            do {
                 for (HKCategorySample *sample in results) {
 
                     // HKCategoryType *catType = sample.categoryType;
@@ -315,9 +322,11 @@
                     [data addObject:elem];
                 }
 
-                completion(data, error);
-            });
-        }
+                completion(data, nil);
+            } catch let runError as NSError {
+                completion(nil, runError);
+            }
+        });
     };
 
     // HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:quantityType
@@ -347,17 +356,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 - (void)fetchCorrelationSamplesOfType:(HKQuantityType *)quantityType
                                  unit:(HKUnit *)unit
                             predicate:(NSPredicate *)predicate
@@ -372,18 +370,19 @@
     void (^handlerBlock)(HKSampleQuery *query, NSArray *results, NSError *error);
     // create and assign the block
     handlerBlock = ^(HKSampleQuery *query, NSArray *results, NSError *error) {
-        if (!results) {
-            if (completion) {
-                completion(nil, error);
-            }
+        if (!completion) {
             return;
         }
 
-        if (completion) {
-            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+        if (error) {
+            completion(nil, error);
+            return;
+        }
 
-            dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
+        dispatch_async(dispatch_get_main_queue(), ^{
+            do {
                 for (HKCorrelation *sample in results) {
                     NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
                     NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
@@ -396,9 +395,11 @@
                     [data addObject:elem];
                 }
 
-                completion(data, error);
-            });
-        }
+                completion(data, nil);
+            } catch let runError as NSError {
+                completion(nil, runError);
+            }
+        });
     };
 
     HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:quantityType

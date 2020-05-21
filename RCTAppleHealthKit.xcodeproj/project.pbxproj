@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		231F1C04B9ECC5437F11B2C9 /* Pods_RCTAppleHealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77BF357DFDEF26C52FEC2E49 /* Pods_RCTAppleHealthKit.framework */; };
 		3774C8911D2092F20000B3F3 /* RCTAppleHealthKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3774C8901D2092F20000B3F3 /* RCTAppleHealthKit.h */; };
 		3774C8931D2092F20000B3F3 /* RCTAppleHealthKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3774C8921D2092F20000B3F3 /* RCTAppleHealthKit.m */; };
 		3774C89B1D2095450000B3F3 /* RCTAppleHealthKit+Queries.m in Sources */ = {isa = PBXBuildFile; fileRef = 3774C89A1D2095450000B3F3 /* RCTAppleHealthKit+Queries.m */; };
@@ -21,7 +22,6 @@
 		64C42D4A1D351A8800A0A8F7 /* RCTAppleHealthKit+Methods_Vitals.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C42D491D351A8800A0A8F7 /* RCTAppleHealthKit+Methods_Vitals.m */; };
 		64E0E73F1D37947B00EAB905 /* RCTAppleHealthKit+Methods_Results.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E0E73E1D37947B00EAB905 /* RCTAppleHealthKit+Methods_Results.m */; };
 		846A98EA215244E7000C3E5D /* RCTAppleHealthKit+Methods_Dietary.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A98E9215244E6000C3E5D /* RCTAppleHealthKit+Methods_Dietary.m */; };
-		C7F88CE6A9E2D530A1CBDFAA /* Pods_RCTAppleHealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C84411FDBEEBD8BA9C43C813 /* Pods_RCTAppleHealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,17 +57,17 @@
 		37837E7C1DCFE270000201A0 /* RCTAppleHealthKit+Methods_Sleep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTAppleHealthKit+Methods_Sleep.m"; sourceTree = "<group>"; };
 		58C81E6D1F84F6970005DD48 /* RCTAppleHealthKit+Methods_Activity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "RCTAppleHealthKit+Methods_Activity.m"; sourceTree = "<group>"; };
 		58C81E6E1F84F6970005DD48 /* RCTAppleHealthKit+Methods_Activity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTAppleHealthKit+Methods_Activity.h"; sourceTree = "<group>"; };
-		5ED55FED5925473BC28AF03D /* Pods-RCTAppleHealthKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCTAppleHealthKit.release.xcconfig"; path = "Target Support Files/Pods-RCTAppleHealthKit/Pods-RCTAppleHealthKit.release.xcconfig"; sourceTree = "<group>"; };
 		61232F911E303758000A5026 /* RCTAppleHealthKit+Methods_Mindfulness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTAppleHealthKit+Methods_Mindfulness.h"; sourceTree = "<group>"; };
 		61232F921E303758000A5026 /* RCTAppleHealthKit+Methods_Mindfulness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTAppleHealthKit+Methods_Mindfulness.m"; sourceTree = "<group>"; };
 		64C42D481D351A8800A0A8F7 /* RCTAppleHealthKit+Methods_Vitals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTAppleHealthKit+Methods_Vitals.h"; sourceTree = "<group>"; };
 		64C42D491D351A8800A0A8F7 /* RCTAppleHealthKit+Methods_Vitals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTAppleHealthKit+Methods_Vitals.m"; sourceTree = "<group>"; };
 		64E0E73D1D37947B00EAB905 /* RCTAppleHealthKit+Methods_Results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTAppleHealthKit+Methods_Results.h"; sourceTree = "<group>"; };
 		64E0E73E1D37947B00EAB905 /* RCTAppleHealthKit+Methods_Results.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTAppleHealthKit+Methods_Results.m"; sourceTree = "<group>"; };
+		65EA5306CD45C08196CF096F /* Pods-RCTAppleHealthKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCTAppleHealthKit.release.xcconfig"; path = "Target Support Files/Pods-RCTAppleHealthKit/Pods-RCTAppleHealthKit.release.xcconfig"; sourceTree = "<group>"; };
+		77BF357DFDEF26C52FEC2E49 /* Pods_RCTAppleHealthKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RCTAppleHealthKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		846A98E8215244E6000C3E5D /* RCTAppleHealthKit+Methods_Dietary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTAppleHealthKit+Methods_Dietary.h"; sourceTree = "<group>"; };
 		846A98E9215244E6000C3E5D /* RCTAppleHealthKit+Methods_Dietary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTAppleHealthKit+Methods_Dietary.m"; sourceTree = "<group>"; };
-		AD8403CE6AF2AAD2D7CEE97E /* Pods-RCTAppleHealthKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCTAppleHealthKit.debug.xcconfig"; path = "Target Support Files/Pods-RCTAppleHealthKit/Pods-RCTAppleHealthKit.debug.xcconfig"; sourceTree = "<group>"; };
-		C84411FDBEEBD8BA9C43C813 /* Pods_RCTAppleHealthKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RCTAppleHealthKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2DE57AFAF322FD4E7D3A4BF /* Pods-RCTAppleHealthKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCTAppleHealthKit.debug.xcconfig"; path = "Target Support Files/Pods-RCTAppleHealthKit/Pods-RCTAppleHealthKit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7F88CE6A9E2D530A1CBDFAA /* Pods_RCTAppleHealthKit.framework in Frameworks */,
+				231F1C04B9ECC5437F11B2C9 /* Pods_RCTAppleHealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +88,7 @@
 				3774C88F1D2092F20000B3F3 /* RCTAppleHealthKit */,
 				3774C88E1D2092F20000B3F3 /* Products */,
 				B50D2EA9671519248AFEBEE7 /* Pods */,
-				BF8F8FA9DB6FF33D400AA73E /* Frameworks */,
+				4C7F67E44581D388B3B3FB3B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,21 +133,21 @@
 			path = RCTAppleHealthKit;
 			sourceTree = "<group>";
 		};
+		4C7F67E44581D388B3B3FB3B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77BF357DFDEF26C52FEC2E49 /* Pods_RCTAppleHealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B50D2EA9671519248AFEBEE7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AD8403CE6AF2AAD2D7CEE97E /* Pods-RCTAppleHealthKit.debug.xcconfig */,
-				5ED55FED5925473BC28AF03D /* Pods-RCTAppleHealthKit.release.xcconfig */,
+				D2DE57AFAF322FD4E7D3A4BF /* Pods-RCTAppleHealthKit.debug.xcconfig */,
+				65EA5306CD45C08196CF096F /* Pods-RCTAppleHealthKit.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		BF8F8FA9DB6FF33D400AA73E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C84411FDBEEBD8BA9C43C813 /* Pods_RCTAppleHealthKit.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,7 +157,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3774C8961D2092F20000B3F3 /* Build configuration list for PBXNativeTarget "RCTAppleHealthKit" */;
 			buildPhases = (
-				4827C5812AF01D94AD806134 /* [CP] Check Pods Manifest.lock */,
+				14DF34B882A86BD3A0BF0EB5 /* [CP] Check Pods Manifest.lock */,
 				3774C8891D2092F20000B3F3 /* Sources */,
 				3774C88A1D2092F20000B3F3 /* Frameworks */,
 				3774C88B1D2092F20000B3F3 /* CopyFiles */,
@@ -204,7 +204,7 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4827C5812AF01D94AD806134 /* [CP] Check Pods Manifest.lock */ = {
+		14DF34B882A86BD3A0BF0EB5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -360,7 +360,7 @@
 		};
 		3774C8971D2092F20000B3F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD8403CE6AF2AAD2D7CEE97E /* Pods-RCTAppleHealthKit.debug.xcconfig */;
+			baseConfigurationReference = D2DE57AFAF322FD4E7D3A4BF /* Pods-RCTAppleHealthKit.debug.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../react-native/React/**",
@@ -375,7 +375,7 @@
 		};
 		3774C8981D2092F20000B3F3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5ED55FED5925473BC28AF03D /* Pods-RCTAppleHealthKit.release.xcconfig */;
+			baseConfigurationReference = 65EA5306CD45C08196CF096F /* Pods-RCTAppleHealthKit.release.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../react-native/React/**",
