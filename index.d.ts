@@ -26,6 +26,7 @@ declare module "rn-apple-healthkit" {
       "FatTotal" |
       "Fiber" |
       "Folate" |
+      "HeartRateVariability" |
       "Iodine" |
       "Iron" |
       "Magnesium" |
@@ -88,6 +89,13 @@ declare module "rn-apple-healthkit" {
       readonly endDate?: ISO8601DateString;
     }
 
+    export interface HeartRateVariabilitySamplesOptions {
+        readonly limit?: number;
+        readonly ascending?: boolean;
+        readonly startDate: ISO8601DateString;
+        readonly endDate?: ISO8601DateString;
+    }
+
     export interface AppleHealthKit {
         initHealthKit(permissions: HealthKitPermissions, callback: (error: string, result: Object) => void): void;
 
@@ -106,6 +114,8 @@ declare module "rn-apple-healthkit" {
         getStepCount(options: any, callback: (err: string, results: HealthValue) => void): void;
 
         getOxygenSamples(options: OxygenSamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
+
+        getHeartRateVariabilitySamples(options: HeartRateVariabilitySamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
     }
 
     export interface HealthDateOfBirth {
