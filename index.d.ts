@@ -133,10 +133,8 @@ declare module "rn-apple-healthkit" {
 
         getRestingHeartRateSamples(options: RestingHeartRateSamplesOptions, callback: (err: string, results: ReadonlyArray<HealthValue>) => void): void;
 
-        getSleepSamples(options: SleepSamplesOptions, callback: (err: string, results: ReadonlyArray<ResultValue<SleepType>>) => void): void;
+        getSleepSamples(options: SleepSamplesOptions, callback: (err: string, results: ReadonlyArray<SleepValue>) => void): void;
     }
-
-    export type SleepType = 'INBED' | 'ASLEEP' | 'AWAKE';
 
     export interface HealthDateOfBirth {
         value: string;
@@ -148,6 +146,10 @@ declare module "rn-apple-healthkit" {
         readonly startDate: string;
         readonly endDate: string;
     }
+
+    export type SleepType = 'INBED' | 'ASLEEP' | 'AWAKE';
+
+    export type SleepValue = ResultValue<SleepType>;
 
     export type HealthValue = ResultValue<number>;
 
