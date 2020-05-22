@@ -43,7 +43,7 @@
 {
     HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRateVariabilitySDNN];
 
-    HKUnit *unit = [HKUnit secondUnit];
+    HKUnit *unit = [HKUnit secondUnitWithMetricPrefix:HKMetricPrefixMilli];
     NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
     BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
     NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
@@ -60,13 +60,11 @@
                            ascending:ascending
                                limit:limit
                           completion:^(NSArray *results, NSError *error) {
-        if(results){
-            callback(@[[NSNull null], results]);
-            return;
-        } else {
+        if(error){
             callback(@[RCTJSErrorFromNSError(error)]);
             return;
         }
+        callback(@[[NSNull null], results]);
     }];
 }
 
@@ -74,7 +72,7 @@
 {
     HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierRestingHeartRate];
 
-    HKUnit *unit = [HKUnit secondUnit];
+    HKUnit *unit = [HKUnit secondUnitWithMetricPrefix:HKMetricPrefixMilli];
     NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
     BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
     NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
@@ -151,14 +149,12 @@
                            ascending:ascending
                                limit:limit
                           completion:^(NSArray *results, NSError *error) {
-        if(results){
-            callback(@[[NSNull null], results]);
-            return;
-        } else {
+        if(error){
             NSLog(@"error getting body temperature samples: %@", error);
             callback(@[RCTMakeError(@"error getting body temperature samples", nil, nil)]);
             return;
         }
+        callback(@[[NSNull null], results]);
     }];
 }
 
@@ -187,32 +183,30 @@
                            ascending:ascending
                                limit:limit
                           completion:^(NSArray *results, NSError *error) {
-        if(results){
-            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
-
-            for (NSDictionary *sample in results) {
-                HKCorrelation *bloodPressureValues = [sample valueForKey:@"correlation"];
-
-                HKQuantitySample *bloodPressureSystolicValue = [bloodPressureValues objectsForType:systolicType].anyObject;
-                HKQuantitySample *bloodPressureDiastolicValue = [bloodPressureValues objectsForType:diastolicType].anyObject;
-
-                NSDictionary *elem = @{
-                                       @"bloodPressureSystolicValue" : @([bloodPressureSystolicValue.quantity doubleValueForUnit:unit]),
-                                       @"bloodPressureDiastolicValue" : @([bloodPressureDiastolicValue.quantity doubleValueForUnit:unit]),
-                                       @"startDate" : [sample valueForKey:@"startDate"],
-                                       @"endDate" : [sample valueForKey:@"endDate"],
-                                      };
-
-                [data addObject:elem];
-            }
-
-            callback(@[[NSNull null], data]);
-            return;
-        } else {
+        if(error){
             NSLog(@"error getting blood pressure samples: %@", error);
             callback(@[RCTMakeError(@"error getting blood pressure samples", nil, nil)]);
             return;
         }
+        NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+
+        for (NSDictionary *sample in results) {
+            HKCorrelation *bloodPressureValues = [sample valueForKey:@"correlation"];
+
+            HKQuantitySample *bloodPressureSystolicValue = [bloodPressureValues objectsForType:systolicType].anyObject;
+            HKQuantitySample *bloodPressureDiastolicValue = [bloodPressureValues objectsForType:diastolicType].anyObject;
+
+            NSDictionary *elem = @{
+                                   @"bloodPressureSystolicValue" : @([bloodPressureSystolicValue.quantity doubleValueForUnit:unit]),
+                                   @"bloodPressureDiastolicValue" : @([bloodPressureDiastolicValue.quantity doubleValueForUnit:unit]),
+                                   @"startDate" : [sample valueForKey:@"startDate"],
+                                   @"endDate" : [sample valueForKey:@"endDate"],
+                                  };
+
+            [data addObject:elem];
+        }
+
+        callback(@[[NSNull null], data]);
     }];
 }
 
@@ -241,14 +235,12 @@
                            ascending:ascending
                                limit:limit
                           completion:^(NSArray *results, NSError *error) {
-        if(results){
-            callback(@[[NSNull null], results]);
-            return;
-        } else {
+        if(error){
             NSLog(@"error getting respiratory rate samples: %@", error);
             callback(@[RCTMakeError(@"error getting respiratory rate samples", nil, nil)]);
             return;
         }
+        callback(@[[NSNull null], results]);
     }];
 }
 
