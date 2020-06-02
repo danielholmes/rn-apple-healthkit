@@ -333,6 +333,11 @@ RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseS
     }
 }
 
+RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+  resolve("test");
+}
+
 RCT_EXPORT_METHOD(authorizationStatusForType:(NSString *)type
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject
