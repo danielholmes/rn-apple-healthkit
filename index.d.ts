@@ -27,6 +27,7 @@ declare module "rn-apple-healthkit" {
       "Fiber" |
       "Folate" |
       "HeartRateVariability" |
+      "Heartbeat" |
       "Iodine" |
       "Iron" |
       "Magnesium" |
