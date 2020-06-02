@@ -335,7 +335,53 @@ RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseS
 
 RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
-  resolve(@"test");
+  // [self custom_getMindfulSession:input resolve:resolve reject:reject];
+// let heartbeatSeriesSampleQuery = HKSampleQuery(sampleType: HKSeriesType.heartbeat(),
+// predicate: predicate,
+// limit: HKObjectQueryNoLimit, sortDescriptors: nil) {
+
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+        initWithKey:HKSampleSortIdentifierStartDate
+        ascending:NO
+    ];
+    HKSeriesType *sampleType = [HKSeriesType heartbeatSeriesType];
+    HKSampleQuery *query = [[HKSampleQuery alloc]
+        initWithSampleType:sampleType
+        predicate:nil
+        limit:HKObjectQueryNoLimit
+        sortDescriptors:@[sortDescriptor]
+        resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
+            if (error) {
+                reject(@[RCTJSErrorFromNSError(error)]);
+                return;
+            }
+
+//             HKQuantitySample *quantitySample = results.firstObject;
+//             HKQuantity *quantity = quantitySample.quantity;
+//             NSDate *startDate = quantitySample.startDate;
+//             NSDate *endDate = quantitySample.endDate;
+            resolve(@"Done");
+        }
+    ];
+    [self.healthStore executeQuery:query];
+
+//         (query, results, error) in
+//         guard let samples = results, let sample = samples.first as? HKHeartbeatSeriesSample else {
+//             print("NO SAMPLES MY FRIEND")
+//             return
+//         }
+//         let heartbeatSeriesQuery = HKHeartbeatSeriesQuery(heartbeatSeries: sample) {
+//             (query, timeSinceSeriesStart, precededByGap, done, error) in
+//             guard error == nil else {
+//                 print("error in HKHeartbeatSeriesQuery: \(String(describing: error))")
+//                 return
+//             }
+//             print("timeSinceSeriesStart = \(timeSinceSeriesStart), precededByGap = \(precededByGap)")
+//         }
+//         self.healthStore.execute(heartbeatSeriesQuery)
+//     }
+//
+//     completionHandler()
 }
 
 RCT_EXPORT_METHOD(authorizationStatusForType:(NSString *)type
