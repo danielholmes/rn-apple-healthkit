@@ -111,6 +111,8 @@ declare module "rn-apple-healthkit" {
     }
 
     export interface AppleHealthKit {
+        testPromise(): Promise<string>;
+
         initHealthKit(permissions: HealthKitPermissions, callback: (error: Error | null, result: Object) => void): void;
 
         saveFood(options: Object, callback: (error: Error | null, result: Object) => void): void;
