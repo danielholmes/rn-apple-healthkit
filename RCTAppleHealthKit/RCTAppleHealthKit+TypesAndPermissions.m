@@ -68,7 +68,9 @@
     }
 
     // Vital Signs Identifiers
-    if ([@"HeartRate" isEqualToString: key]) {
+    if ([@"Heartbeat" isEqualToString: key]) {
+        return [HKObjectType quantityTypeForIdentifier:HKDataTypeIdentifierHeartbeatSeries];
+    }else if ([@"HeartRate" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     }else if ([@"HeartRateVariability" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRateVariabilitySDNN];
