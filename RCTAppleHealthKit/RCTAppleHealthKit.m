@@ -352,7 +352,7 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
         sortDescriptors:@[sortDescriptor]
         resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
             if (error) {
-                reject(@[RCTJSErrorFromNSError(error)]);
+                reject(@"error", @"some error description", error);
                 return;
             }
 
