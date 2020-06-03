@@ -357,7 +357,7 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
                         return;
                     }
                     RCTLog(@"finish done");
-                }]
+                }];
             } else {
                 RCTLog(@"Saved interval fail");
             }
