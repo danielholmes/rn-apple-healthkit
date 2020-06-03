@@ -349,9 +349,9 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
         precededByGap:false
         completion:^(BOOL success, NSError *error) {
             if (success) {
-                [RTCLog @"Saved interval success"];
+                [RCTLog @"Saved interval success"];
             } else {
-                [RTCLog @"Saved interval fail"];
+                [RCTLog @"Saved interval fail"];
             }
         }];
 
