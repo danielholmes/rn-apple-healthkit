@@ -334,7 +334,8 @@ RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseS
     }
 }
 
-RCT_EXPORT_METHOD(getHeartbeatSeriesSamples:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(getHeartbeatSeriesSamples:(NSDictionary *)input
+                  resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
   // [self custom_getMindfulSession:input resolve:resolve reject:reject];
 // let heartbeatSeriesSampleQuery = HKSampleQuery(sampleType: HKSeriesType.heartbeat(),
@@ -381,9 +382,11 @@ RCT_EXPORT_METHOD(getHeartbeatSeriesSamples:(RCTPromiseResolveBlock)resolve
     ];
     HKUnit *unit = [HKUnit secondUnitWithMetricPrefix:HKMetricPrefixMilli];
     HKSeriesType *sampleType = [HKSeriesType heartbeatSeriesType];
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
+    NSPredicate *predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:nil];
     HKSampleQuery *query = [[HKSampleQuery alloc]
         initWithSampleType:sampleType
-        predicate:nil
+        predicate:predicate
         limit:HKObjectQueryNoLimit
         sortDescriptors:@[sortDescriptor]
         resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {

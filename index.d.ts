@@ -125,6 +125,10 @@ declare module "rn-apple-healthkit" {
         readonly precededByGap: boolean;
     }
 
+    export interface HeartbeatSeriesSampleOptions {
+        readonly startDate: ISO8601DateString;
+    }
+
     export interface HeartbeatSeriesSample {
         readonly sourceRevision: SourceRevision;
         readonly startDate: ISO8601DateString;
@@ -133,13 +137,13 @@ declare module "rn-apple-healthkit" {
     }
 
     export interface AppleHealthKit {
-        getHeartbeatSeriesSamples(): Promise<ReadonlyArray<HeartbeatSeriesSample>>;
-
         initHealthKit(permissions: HealthKitPermissions, callback: (error: Error | null, result: Object) => void): void;
 
         saveFood(options: Object, callback: (error: Error | null, result: Object) => void): void;
 
         isAvailable(callback: (error: Object, results: boolean) => void): void;
+
+        getHeartbeatSeriesSamples(options: HeartbeatSeriesSampleOptions): Promise<ReadonlyArray<HeartbeatSeriesSample>>;
 
         getDateOfBirth(options: any, callback: (error: Object, results: HealthDateOfBirth) => void): void;
 
