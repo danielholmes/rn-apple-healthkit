@@ -379,8 +379,8 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
             dispatch_async(dispatch_get_main_queue(), ^{
                 @try {
                     for (HKQuantitySample *sample in results) {
-                        HKHeartbeatSeriesSample *hbSample = (HKHeartbeatSeriesSample *)sample;
-                        HKQuantity *quantity = hbSample.quantity;
+                        // HKHeartbeatSeriesSample *hbSample = (HKHeartbeatSeriesSample *)sample;
+                        HKQuantity *quantity = sample.quantity;
                         double value = [quantity doubleValueForUnit:unit];
 
 //                         NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
