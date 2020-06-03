@@ -336,7 +336,7 @@ RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseS
 
 RCT_EXPORT_METHOD(getHeartbeatSeriesSamples:(NSDictionary *)input
                   resolver:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject) {
+                  rejecter:(RCTPromiseRejectBlock)reject {
   // [self custom_getMindfulSession:input resolve:resolve reject:reject];
 // let heartbeatSeriesSampleQuery = HKSampleQuery(sampleType: HKSeriesType.heartbeat(),
 // predicate: predicate,
@@ -469,7 +469,7 @@ RCT_EXPORT_METHOD(getHeartbeatSeriesSamples:(NSDictionary *)input
 //     }
 //
 //     completionHandler()
-}
+})
 
 RCT_EXPORT_METHOD(authorizationStatusForType:(NSString *)type
                   resolver:(RCTPromiseResolveBlock)resolve
