@@ -344,6 +344,7 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
         initWithKey:HKSampleSortIdentifierStartDate
         ascending:NO
     ];
+    HKUnit *unit = [HKUnit secondUnitWithMetricPrefix:HKMetricPrefixMilli];
     HKSeriesType *sampleType = [HKSeriesType heartbeatSeriesType];
     HKSampleQuery *query = [[HKSampleQuery alloc]
         initWithSampleType:sampleType
