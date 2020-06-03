@@ -19,6 +19,7 @@
 #import "RCTAppleHealthKit+Methods_Results.h"
 #import "RCTAppleHealthKit+Methods_Sleep.h"
 #import "RCTAppleHealthKit+Methods_Mindfulness.h"
+#import "RCTAppleHealthKit+Utils.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -333,36 +334,46 @@ RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseS
     }
 }
 
-RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(getHeartBeatSeriesSamples:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
   // [self custom_getMindfulSession:input resolve:resolve reject:reject];
 // let heartbeatSeriesSampleQuery = HKSampleQuery(sampleType: HKSeriesType.heartbeat(),
 // predicate: predicate,
 // limit: HKObjectQueryNoLimit, sortDescriptors: nil) {
-    NSDate* now = [NSDate date];
-    HKHeartbeatSeriesBuilder *heartbeatSeriesBuilder = [[HKHeartbeatSeriesBuilder alloc]
-        initWithHealthStore:self.healthStore
-        device:nil
-        startDate:now];
-    NSTimeInterval interval = 0.8;
-    RCTLog(@"Saving beat");
-    [heartbeatSeriesBuilder addHeartbeatWithTimeIntervalSinceSeriesStartDate:interval
-        precededByGap:false
-        completion:^(BOOL success, NSError *error) {
-            if (success) {
-                RCTLog(@"Saved interval success");
-                [heartbeatSeriesBuilder finishSeriesWithCompletion:^(HKHeartbeatSeriesSample *heartbeatSeries, NSError *error) {
-                    if (error) {
-                        RCTLog(@"finish error");
-                        return;
-                    }
-                    RCTLog(@"finish done");
-                }];
-            } else {
-                RCTLog(@"Saved interval fail");
-            }
-        }];
-
+//     NSDate* now = [NSDate date];
+//     HKHeartbeatSeriesBuilder *heartbeatSeriesBuilder = [[HKHeartbeatSeriesBuilder alloc]
+//         initWithHealthStore:self.healthStore
+//         device:nil
+//         startDate:now];
+//     RCTLog(@"Saving beat");
+//     [heartbeatSeriesBuilder addHeartbeatWithTimeIntervalSinceSeriesStartDate:0.1
+//         precededByGap:false
+//         completion:^(BOOL success, NSError *error) {
+//             [heartbeatSeriesBuilder addHeartbeatWithTimeIntervalSinceSeriesStartDate:0.3
+//                 precededByGap:false
+//                 completion:^(BOOL success, NSError *error) {
+//                     [heartbeatSeriesBuilder addHeartbeatWithTimeIntervalSinceSeriesStartDate:0.5
+//                         precededByGap:false
+//                         completion:^(BOOL success, NSError *error) {
+//                             if (success) {
+//                                 RCTLog(@"Saved interval success");
+//                                 [heartbeatSeriesBuilder finishSeriesWithCompletion:^(HKHeartbeatSeriesSample *heartbeatSeries, NSError *error) {
+//                                     if (error) {
+//                                         RCTLog(@"finish error");
+//                                         RCTLog([error localizedDescription]);
+//                                         return;
+//                                     }
+//                                     RCTLog(@"finish done");
+//                                 }];
+//                             } else {
+//                                 RCTLog(@"Saved interval fail");
+//                             }
+//                         }
+//                     ];
+//                 }
+//             ];
+//         }
+//     ];
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
         initWithKey:HKSampleSortIdentifierStartDate
@@ -381,30 +392,55 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
                 return;
             }
 
-            // TODO: Array should be results length
-            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+            NSMutableArray *data = [NSMutableArray arrayWithCapacity:0];
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 @try {
                     for (HKQuantitySample *sample in results) {
-                        // HKHeartbeatSeriesSample *hbSample = (HKHeartbeatSeriesSample *)sample;
-                        HKQuantity *quantity = sample.quantity;
-                        double value = [quantity doubleValueForUnit:unit];
+                        HKHeartbeatSeriesSample *hbSample = (HKHeartbeatSeriesSample *)sample;
+                        NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:hbSample.startDate];
+                        NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:hbSample.endDate];
 
-//                         NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
-//                         NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
+                        NSMutableArray *times = [NSMutableArray arrayWithCapacity:0];
+                        HKHeartbeatSeriesQuery* detailsQuery = [[HKHeartbeatSeriesQuery alloc] initWithHeartbeatSeries:hbSample
+                            dataHandler:^(HKHeartbeatSeriesQuery *query, NSTimeInterval timeSinceSeriesStart, BOOL precededByGap, BOOL done, NSError *error) {
+                                if (error) {
+                                    // TODO: Ensure only call once if multiple errors
+                                    reject(@"error", [error description], error);
+                                    return;
+                                }
 
-                        NSDictionary *elem = @{
-                                @"value" : @(value),
-//                                 @"sourceName" : [[[sample sourceRevision] source] name],
-//                                 @"sourceId" : [[[sample sourceRevision] source] bundleIdentifier],
-//                                 @"startDate" : startDateString,
-//                                 @"endDate" : endDateString,
-                        };
-                        [data addObject:elem];
+                                NSDictionary *time = @{
+                                    @"timeSinceSeriesStart": @(timeSinceSeriesStart),
+                                    @"precededByGap": @(precededByGap)
+                                };
+                                [times addObject:time];
+
+                                // TODO: Generic. See https://gist.github.com/priore/3a0bafd04f2e9f0da3c6
+                                if (!done) {
+                                    return;
+                                }
+
+                                NSDictionary *elem = @{
+                                    // @"count": @([hbSample count]),
+                                    @"sourceRevision" : @{
+                                        @"source": @{
+                                            @"name": [[[hbSample sourceRevision] source] name],
+                                            @"bundleIdentifier" : [[[hbSample sourceRevision] source] bundleIdentifier]
+                                        }
+                                    },
+                                    @"startDate" : startDateString,
+                                    @"endDate" : endDateString,
+                                    @"times": times
+                                };
+                                [data addObject:elem];
+
+                                if ([data count] == [results count]) {
+                                    resolve(data);
+                                }
+                            }];
+                        [self.healthStore executeQuery:detailsQuery];
                     }
-
-                    resolve(data);
                 } @catch (NSError *runError) {
                     reject(@"error", @"Error parsing results", runError);
                 }

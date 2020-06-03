@@ -111,8 +111,29 @@ declare module "rn-apple-healthkit" {
         readonly endDate?: ISO8601DateString;
     }
 
+    export interface Source {
+        readonly name: string;
+        readonly bundleIdentifier: string;
+    }
+
+    export interface SourceRevision {
+        readonly source: Source;
+    }
+
+    export interface HeartbeatTime {
+        readonly timeSinceSeriesStart: number;
+        readonly precededByGap: boolean;
+    }
+
+    export interface HeartbeatSeriesSample {
+        readonly sourceRevision: SourceRevision;
+        readonly startDate: ISO8601DateString;
+        readonly endDate: ISO8601DateString;
+        readonly times: ReadonlyArray<HeartbeatTime>;
+    }
+
     export interface AppleHealthKit {
-        testPromise(): Promise<string>;
+        getHeartbeatSeriesSamples(): Promise<ReadonlyArray<HeartbeatSeriesSample>>;
 
         initHealthKit(permissions: HealthKitPermissions, callback: (error: Error | null, result: Object) => void): void;
 
