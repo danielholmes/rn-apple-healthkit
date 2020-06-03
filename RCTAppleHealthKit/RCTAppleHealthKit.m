@@ -379,7 +379,7 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
             dispatch_async(dispatch_get_main_queue(), ^{
                 @try {
                     for (HKQuantitySample *sample in results) {
-                        HKHeartbeatSeriesSample *hbSample = sample as HKHeartbeatSeriesSample;
+                        HKHeartbeatSeriesSample *hbSample = (HKHeartbeatSeriesSample *)sample;
                         HKQuantity *quantity = hbSample.quantity;
                         double value = [quantity doubleValueForUnit:unit];
 
