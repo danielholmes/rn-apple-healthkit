@@ -339,6 +339,22 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
 // let heartbeatSeriesSampleQuery = HKSampleQuery(sampleType: HKSeriesType.heartbeat(),
 // predicate: predicate,
 // limit: HKObjectQueryNoLimit, sortDescriptors: nil) {
+    NSDate* now = [NSDate date];
+    HKHeartbeatSeriesBuilder *heartbeatSeriesBuilder = [[HKHeartbeatSeriesBuilder alloc]
+        initWithHealthStore:self.healthStore
+        device:nil
+        startDate:now];
+    NSTimeInterval interval = 0.8;
+    [heartbeatSeriesBuilder addHeartbeatWithTimeIntervalSinceSeriesStartDate:interval
+        precededByGap:false
+        completion:^(BOOL success, NSError *error) {
+            if (success) {
+                RTCLog(@"Saved interval success");
+            } else {
+                RTCLog(@"Saved interval fail");
+            }
+        }];
+
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
         initWithKey:HKSampleSortIdentifierStartDate
@@ -363,7 +379,8 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
             dispatch_async(dispatch_get_main_queue(), ^{
                 @try {
                     for (HKQuantitySample *sample in results) {
-                        HKQuantity *quantity = sample.quantity;
+                        HKHeartbeatSeriesSample *hbSample = sample as HKHeartbeatSeriesSample;
+                        HKQuantity *quantity = hbSample.quantity;
                         double value = [quantity doubleValueForUnit:unit];
 
 //                         NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
