@@ -356,11 +356,33 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
                 return;
             }
 
-//             HKQuantitySample *quantitySample = results.firstObject;
-//             HKQuantity *quantity = quantitySample.quantity;
-//             NSDate *startDate = quantitySample.startDate;
-//             NSDate *endDate = quantitySample.endDate;
-            resolve(@"Done");
+            // TODO: Array should be results length
+            NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                @try {
+                    for (HKQuantitySample *sample in results) {
+                        HKQuantity *quantity = sample.quantity;
+                        double value = [quantity doubleValueForUnit:unit];
+
+//                         NSString *startDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate];
+//                         NSString *endDateString = [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate];
+
+                        NSDictionary *elem = @{
+                                @"value" : @(value),
+//                                 @"sourceName" : [[[sample sourceRevision] source] name],
+//                                 @"sourceId" : [[[sample sourceRevision] source] bundleIdentifier],
+//                                 @"startDate" : startDateString,
+//                                 @"endDate" : endDateString,
+                        };
+                        [data addObject:elem];
+                    }
+
+                    resolve(data);
+                } @catch (NSError *runError) {
+                    reject(@"error", @"Error parsing results", runError);
+                }
+            });
         }
     ];
     [self.healthStore executeQuery:query];
