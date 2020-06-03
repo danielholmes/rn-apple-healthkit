@@ -334,7 +334,7 @@ RCT_EXPORT_METHOD(getMindfulSession:(NSDictionary *)input callback:(RCTResponseS
     }
 }
 
-RCT_EXPORT_METHOD(getHeartBeatSeriesSamples:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(getHeartbeatSeriesSamples:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
   // [self custom_getMindfulSession:input resolve:resolve reject:reject];
 // let heartbeatSeriesSampleQuery = HKSampleQuery(sampleType: HKSeriesType.heartbeat(),
