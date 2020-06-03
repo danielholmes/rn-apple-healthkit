@@ -345,11 +345,19 @@ RCT_EXPORT_METHOD(testPromise:(RCTPromiseResolveBlock)resolve
         device:nil
         startDate:now];
     NSTimeInterval interval = 0.8;
+    RCTLog(@"Saving beat");
     [heartbeatSeriesBuilder addHeartbeatWithTimeIntervalSinceSeriesStartDate:interval
         precededByGap:false
         completion:^(BOOL success, NSError *error) {
             if (success) {
                 RCTLog(@"Saved interval success");
+                [heartbeatSeriesBuilder finishSeriesWithCompletion:^(HKHeartbeatSeriesSample *heartbeatSeries, NSError *error) {
+                    if (error) {
+                        RCTLog(@"finish error");
+                        return;
+                    }
+                    RCTLog(@"finish done");
+                }]
             } else {
                 RCTLog(@"Saved interval fail");
             }
