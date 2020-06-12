@@ -396,6 +396,10 @@ RCT_EXPORT_METHOD(getHeartbeatSeriesSamples:(NSDictionary *)input
             }
 
             NSMutableArray *data = [NSMutableArray arrayWithCapacity:0];
+            if ([results count] == 0) {
+                resolve(data);
+                return;
+            }
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 @try {
